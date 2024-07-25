@@ -31,6 +31,7 @@ export const SignupSection = () => {
   const login = async () => {
     window.sessionStorage.clear();
     try {
+      window.sessionStorage.clear();
       const res = await AuthService.login(email, password);
       console.log(res);
       router.replace("/homepage");
@@ -100,108 +101,214 @@ export const SignupSection = () => {
 
   return (
     <div>
-      <section className="w-full flex flex-col gap-10">
-        <div className="flex flex-col w-full gap-2">
-          <h2 className="text-2xl font-bold">Create account</h2>
-          <p className="text-[#727272] text-base font-normal font-['Instrument Sans'] leading-normal">
-            Let&apos;s get you started sharing your links!
-          </p>
-        </div>
-        <div className="w-full">
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col w-full h-full gap-6"
-          >
-            <div className="flex flex-col w-full gap-1">
-              <label htmlFor="email" className="text-xs leading-[18px]">
-                Email address
-              </label>
-              <div className="h-12 px-4 py-3 bg-white rounded-lg border border-[#d9d9d9] justify-start items-center gap-3 inline-flex hover:border hover:border-[#623bff] hover-effect">
-                <FontAwesomeIcon
-                  icon={faEnvelope}
-                  className="w-4 h-4 text-[#737373]"
-                />
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="w-full"
-                  placeholder="e.g. alex@email.com"
-                  value={email}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setEmail(e.target.value)
-                  }
-                />
-              </div>
-              {emailError && (
-                <p className="text-red-500 text-xs">{emailError}</p>
-              )}
-            </div>
-            <div className="flex flex-col w-full gap-1">
-              <label htmlFor="password" className="text-xs leading-[18px]">
-                Password
-              </label>
-              <div className="h-12 px-4 py-3 bg-white rounded-lg border border-[#d9d9d9] justify-start items-center gap-3 inline-flex hover:border hover:border-[#623bff] hover-effect">
-                <FontAwesomeIcon
-                  icon={faLock}
-                  className="w-4 h-4 text-[#737373]"
-                />
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  className="w-full"
-                  placeholder="At least 8 characters"
-                  value={password}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setPassword(e.target.value)
-                  }
-                />
-              </div>
-              {passwordError && (
-                <p className="text-red-500 text-xs">{passwordError}</p>
-              )}
-            </div>
-            <div className="flex flex-col w-full gap-1">
-              <label
-                htmlFor="password-confirm"
-                className="text-[#333333] text-xs font-normal font-['Instrument Sans'] leading-[18px]"
-              >
-                Confirm password
-              </label>
-              <div className="h-12 px-4 py-3 bg-white rounded-lg border border-[#d9d9d9] justify-start items-center gap-3 inline-flex hover:border hover:border-[#623bff] hover-effect">
-                <FontAwesomeIcon
-                  icon={faLock}
-                  className="w-4 h-4 text-[#737373]"
-                />
-                <input
-                  type="password"
-                  name="password-confirm"
-                  id="password-confirm"
-                  className="w-full"
-                  placeholder="At least 8 characters"
-                  value={passwordConfirm}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setPasswordConfirm(e.target.value)
-                  }
-                />
-              </div>
-              {passwordConfirmError && (
-                <p className="text-red-500 text-xs">{passwordConfirmError}</p>
-              )}
-            </div>
-            <span className="text-[#727272] text-xs font-normal leading-[18px]">
-              Password must contain at least 8 characters
-            </span>
-            <button
-              type="submit"
-              className="bg-[#633CFF] hover:bg-[#BEADFF] text-white py-3 rounded-lg"
+      <div>
+        <section className="w-full flex flex-col gap-10">
+          <div className="flex flex-col w-full gap-2">
+            <h2 className="text-2xl font-bold">Create account</h2>
+            <p className="text-[#727272] text-base font-normal font-['Instrument Sans'] leading-normal">
+              Let&apos;s get you started sharing your links!
+            </p>
+          </div>
+          <div className="w-full">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col w-full h-full gap-6"
             >
-              Create new account
-            </button>
-          </form>
-        </div>
-      </section>
+              <div className="flex flex-col w-full gap-1">
+                <label htmlFor="email" className="text-xs leading-[18px]">
+                  Email address
+                </label>
+                <div className="h-12 px-4 py-3 bg-white rounded-lg border border-[#d9d9d9] justify-start items-center gap-3 inline-flex hover:border hover:border-[#623bff] hover-effect">
+                  <FontAwesomeIcon
+                    icon={faEnvelope}
+                    className="w-4 h-4 text-[#737373]"
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    className="w-full"
+                    placeholder="e.g. alex@email.com"
+                    value={email}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setEmail(e.target.value)
+                    }
+                  />
+                </div>
+                {emailError && (
+                  <p className="text-red-500 text-xs">{emailError}</p>
+                )}
+              </div>
+              <div className="flex flex-col w-full gap-1">
+                <label htmlFor="password" className="text-xs leading-[18px]">
+                  Password
+                </label>
+                <div className="h-12 px-4 py-3 bg-white rounded-lg border border-[#d9d9d9] justify-start items-center gap-3 inline-flex hover:border hover:border-[#623bff] hover-effect">
+                  <FontAwesomeIcon
+                    icon={faLock}
+                    className="w-4 h-4 text-[#737373]"
+                  />
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    className="w-full"
+                    placeholder="At least 8 characters"
+                    value={password}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setPassword(e.target.value)
+                    }
+                  />
+                </div>
+                {passwordError && (
+                  <p className="text-red-500 text-xs">{passwordError}</p>
+                )}
+              </div>
+              <div className="flex flex-col w-full gap-1">
+                <label
+                  htmlFor="password-confirm"
+                  className="text-[#333333] text-xs font-normal font-['Instrument Sans'] leading-[18px]"
+                >
+                  Confirm password
+                </label>
+                <div className="h-12 px-4 py-3 bg-white rounded-lg border border-[#d9d9d9] justify-start items-center gap-3 inline-flex hover:border hover:border-[#623bff] hover-effect">
+                  <FontAwesomeIcon
+                    icon={faLock}
+                    className="w-4 h-4 text-[#737373]"
+                  />
+                  <input
+                    type="password"
+                    name="password-confirm"
+                    id="password-confirm"
+                    className="w-full"
+                    placeholder="At least 8 characters"
+                    value={passwordConfirm}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setPasswordConfirm(e.target.value)
+                    }
+                  />
+                </div>
+                {passwordConfirmError && (
+                  <p className="text-red-500 text-xs">{passwordConfirmError}</p>
+                )}
+              </div>
+              <span className="text-[#727272] text-xs font-normal leading-[18px]">
+                Password must contain at least 8 characters
+              </span>
+              <button
+                type="submit"
+                className="bg-[#633CFF] hover:bg-[#BEADFF] text-white py-3 rounded-lg"
+              >
+                Create new account
+              </button>
+            </form>
+          </div>
+        </section>
+      </div>
+      <div>
+        <section className="w-full flex flex-col gap-10">
+          <div className="flex flex-col w-full gap-2">
+            <h2 className="text-2xl font-bold">Create account</h2>
+            <p className="text-[#727272] text-base font-normal font-['Instrument Sans'] leading-normal">
+              Let&apos;s get you started sharing your links!
+            </p>
+          </div>
+          <div className="w-full">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col w-full h-full gap-6"
+            >
+              <div className="flex flex-col w-full gap-1">
+                <label htmlFor="email" className="text-xs leading-[18px]">
+                  Email address
+                </label>
+                <div className="h-12 px-4 py-3 bg-white rounded-lg border border-[#d9d9d9] justify-start items-center gap-3 inline-flex hover:border hover:border-[#623bff] hover-effect">
+                  <FontAwesomeIcon
+                    icon={faEnvelope}
+                    className="w-4 h-4 text-[#737373]"
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    className="w-full"
+                    placeholder="e.g. alex@email.com"
+                    value={email}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setEmail(e.target.value)
+                    }
+                  />
+                </div>
+                {emailError && (
+                  <p className="text-red-500 text-xs">{emailError}</p>
+                )}
+              </div>
+              <div className="flex flex-col w-full gap-1">
+                <label htmlFor="password" className="text-xs leading-[18px]">
+                  Password
+                </label>
+                <div className="h-12 px-4 py-3 bg-white rounded-lg border border-[#d9d9d9] justify-start items-center gap-3 inline-flex hover:border hover:border-[#623bff] hover-effect">
+                  <FontAwesomeIcon
+                    icon={faLock}
+                    className="w-4 h-4 text-[#737373]"
+                  />
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    className="w-full"
+                    placeholder="At least 8 characters"
+                    value={password}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setPassword(e.target.value)
+                    }
+                  />
+                </div>
+                {passwordError && (
+                  <p className="text-red-500 text-xs">{passwordError}</p>
+                )}
+              </div>
+              <div className="flex flex-col w-full gap-1">
+                <label
+                  htmlFor="password-confirm"
+                  className="text-[#333333] text-xs font-normal font-['Instrument Sans'] leading-[18px]"
+                >
+                  Confirm password
+                </label>
+                <div className="h-12 px-4 py-3 bg-white rounded-lg border border-[#d9d9d9] justify-start items-center gap-3 inline-flex hover:border hover:border-[#623bff] hover-effect">
+                  <FontAwesomeIcon
+                    icon={faLock}
+                    className="w-4 h-4 text-[#737373]"
+                  />
+                  <input
+                    type="password"
+                    name="password-confirm"
+                    id="password-confirm"
+                    className="w-full"
+                    placeholder="At least 8 characters"
+                    value={passwordConfirm}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setPasswordConfirm(e.target.value)
+                    }
+                  />
+                </div>
+                {passwordConfirmError && (
+                  <p className="text-red-500 text-xs">{passwordConfirmError}</p>
+                )}
+              </div>
+              <span className="text-[#727272] text-xs font-normal leading-[18px]">
+                Password must contain at least 8 characters
+              </span>
+              <button
+                type="submit"
+                className="bg-[#633CFF] hover:bg-[#BEADFF] text-white py-3 rounded-lg"
+              >
+                Create new account
+              </button>
+            </form>
+          </div>
+        </section>
+      </div>
     </div>
   );
 };

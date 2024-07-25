@@ -20,6 +20,7 @@ export const LoginSection = () => {
     setLoading(true);
     window.sessionStorage.clear();
     try {
+      window.sessionStorage.clear();
       const res = await AuthService.login(email, password);
       console.log(res);
       router.replace("/homepage");
