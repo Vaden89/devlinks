@@ -6,3 +6,21 @@ input:focus {
   border: none;
   outline: none;
 }
+
+select:focus {
+  border: none;
+  outline: none;
+}
+
+.container {
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.hover-effect:hover {
+  box-shadow: 0px 0px 32px 0px rgba(99, 60, 255, 0.25);
+}
