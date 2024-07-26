@@ -1,35 +1,11 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import Image from "next/image";
-import { Loading } from "./components/Loading";
-import { AuthService } from "./services/auth.service";
 import { LoginSection } from "./components/LoginSection";
 import { SignupSection } from "./components/SignupSecton";
 
 export default function Home() {
   const [showCreateAccount, setShowCreateAccount] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
-  const router = useRouter();
-
-  useEffect(() => {
-    checkForSession();
-  }, []);
-
-  const checkForSession = async () => {
-    try {
-      const res = await AuthService.getLoggedInUser();
-      router.replace("/homepage");
-    } catch (error: any) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (loading) {
-    return <Loading />;
-  }
 
   return (
     <main className="flex lg:h-screen bg-[#FAFAFA] min-h-screen flex-col sm:justify-center sm:items-center p-8 gap-16">
@@ -44,10 +20,10 @@ export default function Home() {
           />
           <Image
             src={"/devlinks.png"}
-            width={50}
-            height={50}
+            width={120}
+            height={120}
             alt=""
-            className="w-[135px] h-full"
+            className=""
           />
         </div>
         <div className="w-full flex flex-col gap-6  sm:bg-white sm:p-10 rounded-xl">

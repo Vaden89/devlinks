@@ -12,7 +12,7 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <main className="w-full sm:h-screen min-h-screen flex flex-col items-center bg-[#D9D9D9]">
+    <main className="w-full sm:h-screen lg:h-full min-h-screen flex flex-col items-center bg-[#D9D9D9]">
       <Navbar
         handleActiveSection={handleActiveSection}
         activeSection={activeSection}

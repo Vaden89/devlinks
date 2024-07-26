@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Preview() {
   return (
-    <main className="w-full min-h-screen flex flex-col gap-[60px] sm:bg-[#D9D9D9] items-center">
+    <main className="w-full h-full min-h-screen flex flex-col gap-14 sm:bg-[#D9D9D9] items-center">
       <div className="sm:w-full p-6 z-10">
         <nav className="p-4 bg-white sm:rounded-xl">
           <ul className="flex items-center justify-center sm:justify-between gap-4">

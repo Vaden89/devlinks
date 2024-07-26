@@ -16,8 +16,8 @@ export class AuthService {
     return response;
   }
 
-  static async getLoggedInUser() {
-    const response = await accountClient.get();
+  static async checkForSession() {
+    const response = await accountClient.getSession("current");
     return response;
   }
 }

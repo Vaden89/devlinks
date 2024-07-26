@@ -22,9 +22,8 @@ export const SignupSection = () => {
   const linkdata = {
     github: [],
     twitter: [],
+    youtube: [],
     linkdin: [],
-    stackoverflow: [],
-    leetcode: [],
     userID: "",
   };
 
@@ -33,7 +32,6 @@ export const SignupSection = () => {
     try {
       window.sessionStorage.clear();
       const res = await AuthService.login(email, password);
-      console.log(res);
       router.replace("/homepage");
     } catch (error: any) {
       throw new Error(error);
@@ -102,7 +100,7 @@ export const SignupSection = () => {
   return (
     <div>
       <div>
-        <section className="w-full flex flex-col gap-10">
+        <section className="w-full flex flex-col gap-10 sm:hidden">
           <div className="flex flex-col w-full gap-2">
             <h2 className="text-2xl font-bold">Create account</h2>
             <p className="text-[#727272] text-base font-normal font-['Instrument Sans'] leading-normal">
@@ -206,7 +204,7 @@ export const SignupSection = () => {
         </section>
       </div>
       <div>
-        <section className="w-full flex flex-col gap-10">
+        <section className="hidden sm:flex w-full flex-col gap-10">
           <div className="flex flex-col w-full gap-2">
             <h2 className="text-2xl font-bold">Create account</h2>
             <p className="text-[#727272] text-base font-normal font-['Instrument Sans'] leading-normal">
