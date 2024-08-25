@@ -21,6 +21,7 @@ select:focus {
   display: none;
 }
 
-.hover-effect:hover {
+.hover-effect:hover,
+.hover-effect:focus {
   box-shadow: 0px 0px 32px 0px rgba(99, 60, 255, 0.25);
 }
