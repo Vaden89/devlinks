@@ -41,6 +41,7 @@ export const SignupSection = () => {
   };
 
   const createAccount = async () => {
+    window.sessionStorage.clear();
     setLoading(true);
     try {
       const res = await AuthService.createUser(email, password);
@@ -110,7 +111,7 @@ export const SignupSection = () => {
           <div className="w-full">
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col w-full h-full gap-6"
+              className="flex flex-col w-full h-full gap-4"
             >
               <div className="flex flex-col w-full gap-1">
                 <label htmlFor="email" className="text-xs leading-[18px]">

@@ -1,5 +1,6 @@
-"use client";
-import { useState } from "react";
+// LinkInfoCard.tsx
+
+import React, { useState, useEffect } from "react";
 import {
   faGithub,
   faLinkedin,
@@ -8,48 +9,97 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-interface LinkCardProps {
-  link: string;
+interface Link {
+  id: string;
   platform: string;
+  url: string;
 }
 
-export const LinkInfoCard = () => {
-  const [platform, setPlatform] = useState<string>("github");
-  const [linkURL, setLinkURL] = useState<string>("");
-  const [error, setError] = useState<string | null>();
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setPlatform(e.target.value);
-    validateLink(linkURL);
-  };
-  const handleFormInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLinkURL(e.target.value);
-    validateLink(e.target.value);
+interface LinkCardProps {
+  link: Link;
+  updateLink: (id: string, updatedLink: Partial<Link>) => void;
+  removeLink: (id: string) => void;
+}
+
+export const LinkInfoCard: React.FC<LinkCardProps> = ({
+  link,
+  updateLink,
+  removeLink,
+}) => {
+  const [error, setError] = useState<string | null>(null);
+
+  const handlePlatformChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newPlatform = e.target.value;
+    updateLink(link.id, { platform: newPlatform });
+    validateLink(link.url, newPlatform);
   };
 
-  const validateLink = (url: string) => {
+  const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newUrl = e.target.value;
+    updateLink(link.id, { url: newUrl });
+    validateLink(newUrl, link.platform);
+  };
+
+  const validateLink = (url: string, platform: string) => {
+    if (!url) {
+      setError("Please enter a URL.");
+      return;
+    }
+
     let isValid = false;
+    const urlLower = url.toLowerCase();
 
     switch (platform) {
       case "github":
-        isValid = url.includes("github.com/");
+        isValid = urlLower.includes("github.com/");
         break;
       case "linkedin":
-        isValid = url.includes("linkedin.com/");
+        isValid = urlLower.includes("linkedin.com/");
         break;
       case "twitter":
-        isValid = url.includes("x.com/");
+        isValid =
+          urlLower.includes("twitter.com/") || urlLower.includes("x.com/");
         break;
       case "youtube":
-        isValid = url.includes("youtube.com/");
+        isValid =
+          urlLower.includes("youtube.com/") || urlLower.includes("youtu.be/");
         break;
       default:
+        isValid = true; // For any other platforms, consider it valid
         break;
     }
 
     if (!isValid) {
-      setError((prev) => "Please enter a valid URL for the selected platform.");
+      setError(`Please enter a valid ${platform} URL.`);
     } else {
       setError(null);
+    }
+  };
+
+  useEffect(() => {
+    validateLink(link.url, link.platform);
+  }, [link.url, link.platform]);
+
+  const getPlatformIcon = (platform: string) => {
+    switch (platform) {
+      case "github":
+        return (
+          <FontAwesomeIcon icon={faGithub} className="w-4 h-4 text-[#333]" />
+        );
+      case "linkedin":
+        return (
+          <FontAwesomeIcon icon={faLinkedin} className="w-4 h-4 text-[#333]" />
+        );
+      case "twitter":
+        return (
+          <FontAwesomeIcon icon={faTwitter} className="w-4 h-4 text-[#333]" />
+        );
+      case "youtube":
+        return (
+          <FontAwesomeIcon icon={faYoutube} className="w-4 h-4 text-[#333]" />
+        );
+      default:
+        return null;
     }
   };
 
@@ -58,45 +108,34 @@ export const LinkInfoCard = () => {
       <div className="w-full flex items-center justify-between text-[#737373]">
         <div className="flex items-center gap-2 ">
           <span className="text-xl">=</span>
-          <span className="font-bold">Link #1</span>
+          <span className="font-bold">Link #{link.id}</span>
         </div>
-        <span>Remove</span>
+        <span onClick={() => removeLink(link.id)} className="cursor-pointer">
+          Remove
+        </span>
       </div>
       <div className="flex flex-col w-full gap-1">
-        <label htmlFor="platform" className="text-xs text-[#333]">
+        <label htmlFor={`platform-${link.id}`} className="text-xs text-[#333]">
           Platform
         </label>
         <div className="flex items-center bg-white w-full px-4 py-3 gap-3 border-[1px] border-[#d9d9d9] rounded-lg">
-          {platform === "github" ? (
-            <FontAwesomeIcon icon={faGithub} className="w-4 h-4 text-[#333]" />
-          ) : null}
-          {platform === "linkdin" ? (
-            <FontAwesomeIcon
-              icon={faLinkedin}
-              className="w-4 h-4 text-[#333]"
-            />
-          ) : null}
-          {platform === "youtube" ? (
-            <FontAwesomeIcon icon={faYoutube} className="w-4 h-4 text-[#333]" />
-          ) : null}
-          {platform === "twitter" ? (
-            <FontAwesomeIcon icon={faTwitter} className="w-4 h-4 text-[#333]" />
-          ) : null}
+          {getPlatformIcon(link.platform)}
           <select
-            name="platform"
-            id="platform"
+            name={`platform-${link.id}`}
+            id={`platform-${link.id}`}
             className="w-full"
-            onChange={(e) => handleChange(e)}
+            value={link.platform}
+            onChange={handlePlatformChange}
           >
             <option value="github">GitHub</option>
-            <option value="youtube">Youtube</option>
+            <option value="linkedin">LinkedIn</option>
             <option value="twitter">Twitter</option>
-            <option value="linkdin">Linkdein</option>
+            <option value="youtube">YouTube</option>
           </select>
         </div>
       </div>
       <div className="flex flex-col w-full gap-1">
-        <label htmlFor="link" className="text-xs text-[#333]">
+        <label htmlFor={`link-${link.id}`} className="text-xs text-[#333]">
           Link
         </label>
         <div className="flex items-center bg-white w-full px-4 py-3 gap-3 border-[1px] border-[#d9d9d9] rounded-lg hover:border hover:border-[#623bff] hover-effect">
@@ -114,17 +153,15 @@ export const LinkInfoCard = () => {
           </svg>
           <input
             type="text"
-            name="link"
-            id="link"
-            placeholder="e.g vlad@example.com"
-            value={linkURL}
-            onChange={(e) => {
-              handleFormInput(e);
-            }}
-            className="w-full "
+            name={`link-${link.id}`}
+            id={`link-${link.id}`}
+            placeholder={`e.g. https://${link.platform}.com/username`}
+            value={link.url}
+            onChange={handleUrlChange}
+            className="w-full"
           />
         </div>
-        <span className="text-xs text-red-600">{error && <p>{error}</p>}</span>
+        {error && <span className="text-xs text-red-600">{error}</span>}
       </div>
     </div>
   );
