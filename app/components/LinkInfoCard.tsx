@@ -54,7 +54,7 @@ export const LinkInfoCard = () => {
   };
 
   return (
-    <div className="w-full bg-[#FAFAFA] rounded-xl p-5 flex flex-col gap-3 items-center">
+    <div className="min-w-full bg-[#FAFAFA] rounded-xl p-5 flex flex-col gap-3 items-center">
       <div className="w-full flex items-center justify-between text-[#737373]">
         <div className="flex items-center gap-2 ">
           <span className="text-xl">=</span>

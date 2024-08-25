@@ -45,7 +45,7 @@ export const LinksSection = () => {
       <div className="bg-white w-2/5 hidden lg:flex rounded-lg"></div>
       <div className="w-full lg:w-3/5 h-full flex flex-col bg-white rounded-lg">
         <div className="w-full h-full flex flex-col p-6 gap-6">
-          <div className="flex flex-col items-start gap-10">
+          <div className="w-full flex flex-col items-start gap-10">
             <div className="flex flex-col items-start gap-2">
               <h1 className="text-[#333] text-[32px] font-bold leading-9">
                 Customize your links
